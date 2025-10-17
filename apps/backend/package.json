@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "type": "module",
+  "version": "1.0.50",
+  "module": "src/index.js",
+  "scripts": {
+    "dev": "bun run --watch src/app.ts",
+    "format": "bunx prettier --write .",
+    "lint": "bunx eslint",
+    "lint:fix": "bunx eslint --fix",
+    "pretty": "bun run format && bun run lint:fix"
+  },
+  "dependencies": {
+    "elysia": "latest",
+    "env-var": "^7.5.0"
+  },
+  "devDependencies": {
+    "@0x32/prettier": "^1.0.0",
+    "@repo/eslint-config": "^1.0.0",
+    "bun-types": "latest",
+    "eslint": "^9.37.0",
+    "prettier": "^3.6.2"
+  }
+}
