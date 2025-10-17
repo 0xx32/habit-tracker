@@ -1,0 +1,9 @@
+{
+  "name": "habit-tracker",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
+}
