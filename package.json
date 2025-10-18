@@ -5,5 +5,12 @@
   "workspaces": [
     "packages/*",
     "apps/*"
-  ]
+  ],
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.4"
+  },
+  "scripts": {
+    "prepare": "husky"
+  }
 }

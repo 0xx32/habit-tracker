@@ -15,7 +15,8 @@
 		"db:pull": "bunx drizzle-kit pull",
 		"db:generate": "bunx drizzle-kit generate",
 		"db:migrate": "bunx drizzle-kit migrate",
-		"db:studio": "bunx drizzle-kit studio"
+		"db:studio": "bunx drizzle-kit studio",
+		"prepare": "husky"
 	},
 	"dependencies": {
 		"drizzle-orm": "^0.44.6",
@@ -32,5 +33,9 @@
 		"eslint": "^9.38.0",
 		"prettier": "^3.6.2",
 		"typescript": "^5.9.3"
+	},
+	"lint-staged": {
+		"**/*.{js,ts}": "pretty",
+		"**/*.ts": "check-types"
 	}
 }
