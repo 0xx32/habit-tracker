@@ -1,3 +1,3 @@
-import { nodeConfig } from "@repo/eslint-config";
+import { eslintConfig } from '@0x32/eslint'
 
-export default nodeConfig;
+export default eslintConfig

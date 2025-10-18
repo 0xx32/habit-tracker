@@ -1,9 +1,8 @@
-import prettierConfig from "@0x32/prettier";
+import prettierConfig from '@0x32/prettier'
 
 /**
  * @type {import("prettier").Config}
  */
 export default {
-  ...prettierConfig.default,
-  printWidth: 100,
-};
+	...prettierConfig,
+}
