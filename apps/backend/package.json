@@ -19,6 +19,7 @@
 		"prepare": "husky"
 	},
 	"dependencies": {
+		"@elysiajs/openapi": "^1.4.11",
 		"drizzle-orm": "^0.44.6",
 		"elysia": "latest",
 		"env-var": "^7.5.0",

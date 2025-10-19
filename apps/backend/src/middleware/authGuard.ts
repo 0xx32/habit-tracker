@@ -5,6 +5,16 @@ import { SessionService } from '@/services/session.service'
 import { UnauthorizedError } from '@/utils/errors'
 
 export const authGuard = new Elysia({ name: 'authGuard' })
+	.guard({
+		cookie: t.Cookie(
+			{
+				session: t.String(),
+			},
+			{
+				httpOnly: true,
+			}
+		),
+	})
 	.derive(async ({ cookie }) => {
 		const sessionId = cookie.session.value as string
 		if (!sessionId) throw new UnauthorizedError('Unauthorized')
@@ -16,15 +26,5 @@ export const authGuard = new Elysia({ name: 'authGuard' })
 		if (!user) throw new UnauthorizedError('Unauthorized')
 
 		return { user }
-	})
-	.guard({
-		cookie: t.Cookie(
-			{
-				session: t.String(),
-			},
-			{
-				httpOnly: true,
-			}
-		),
 	})
 	.as('scoped')
