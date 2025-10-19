@@ -1,5 +1,7 @@
 import type { ErrorCode } from './constants/errors'
 
+import { ERROR_CODES } from './constants/errors'
+
 export class AppError extends Error {
 	public statusCode: number
 
@@ -36,5 +38,11 @@ export class ServiceError extends Error {
 	constructor(name: string, message: string, _error?: string) {
 		super(message)
 		this.name = `Service: ${name}`
+	}
+}
+
+export class UnauthorizedError extends AppError {
+	constructor(message: string) {
+		super(message, 401, ERROR_CODES.UNAUTHORIZED)
 	}
 }

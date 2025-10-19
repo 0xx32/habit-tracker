@@ -5,7 +5,7 @@ import { timestamps } from '../helpers/timestamp'
 export const usersTable = pgTable('users', {
 	id: uuid().primaryKey().defaultRandom().unique(),
 	email: text().unique().notNull(),
-	nickname: text().unique().notNull(),
+	nickname: text().unique(),
 	name: text(),
 	level: integer().notNull().default(1),
 	xp: integer().notNull().default(0),

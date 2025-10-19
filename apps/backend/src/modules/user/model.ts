@@ -3,7 +3,7 @@ import { t } from 'elysia'
 const userSchema = t.Object({
 	id: t.String(),
 	email: t.String({ format: 'email' }),
-	nickname: t.String(),
+	nickname: t.Union([t.String(), t.Null()]),
 	name: t.Union([t.String(), t.Null()]),
 	level: t.Number(),
 	xp: t.Number(),
@@ -17,12 +17,7 @@ export const userUrlParams = t.Pick(userSchema, ['id'])
 
 export const getUsersResponse = t.Array(userSchema)
 
-export const createUserDto = t.Intersect([
-	t.Pick(userSchema, ['nickname', 'email']),
-	t.Object({
-		name: t.Optional(t.String()),
-	}),
-])
+export const createUserDto = t.Pick(userSchema, ['email'])
 export type CreateUserDto = typeof createUserDto.static
 
 export const updateUserDto = t.Partial(createUserDto)

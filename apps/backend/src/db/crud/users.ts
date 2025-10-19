@@ -12,6 +12,11 @@ export const findUserById = async (id: UserSelect['id']) => {
 	return result[0]
 }
 
+export const findUserByEmail = async (email: UserSelect['email']) => {
+	const result = await db.select().from(usersTable).where(eq(usersTable.email, email))
+	return result[0]
+}
+
 export const createUser = async (user: UserInsert) => {
 	const result = await db.insert(usersTable).values(user).returning()
 	return result[0]

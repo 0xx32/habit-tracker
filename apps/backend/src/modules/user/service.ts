@@ -51,12 +51,6 @@ export abstract class UserService {
 					if (originalError.code === '23505' && originalError.constraint === 'users_email_unique') {
 						throw new ConflictError('User already exists', ERROR_CODES.USER_ALREADY_EXISTS)
 					}
-					if (
-						originalError.code === '23505' &&
-						originalError.constraint === 'users_nickname_unique'
-					) {
-						throw new ConflictError('User already exists', ERROR_CODES.USER_ALREADY_EXISTS)
-					}
 				}
 			}
 

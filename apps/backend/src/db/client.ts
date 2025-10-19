@@ -3,8 +3,8 @@ import { Pool } from 'pg'
 
 import { DB_CONFIG } from '@/config/db.config'
 
-const pool = new Pool({
+export const pgClient = new Pool({
 	connectionString: DB_CONFIG.URL,
 })
 
-export const db = drizzle({ client: pool, casing: 'snake_case' })
+export const db = drizzle({ client: pgClient, casing: 'snake_case' })
