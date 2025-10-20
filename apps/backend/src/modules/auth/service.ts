@@ -7,9 +7,12 @@ import { db } from '@/db/client'
 import { findLoginTokenById, updateLoginToken } from '@/db/crud/login-tokens'
 import { findUserByEmail } from '@/db/crud/users'
 import { loginTokensTable } from '@/db/schemes/login-tokens'
+import { resendClient } from '@/lib/resend'
 import { UserService } from '@/modules/user'
 import { SessionService } from '@/services/session.service'
+import { MagicLinkEmail } from '@/templates/email/MagicLoginSuccess'
 import { ConflictError, ServiceError } from '@/utils/errors'
+import { renderTemplate } from '@/utils/helpers/renderTemplate'
 
 const TOKEN_LIFETIME = 15 //min
 
@@ -26,8 +29,20 @@ export abstract class AuthService {
 			})
 
 			const link = `http://localhost:4444/api/auth/callback?token=${token}&redirect=${redirectUrl}`
-			// eslint-disable-next-line no-console
-			console.log(`📧 Magic link for ${email}: ${link}`)
+
+			const sendResponse = await resendClient.emails.send({
+				from: `Auth <auth@${APP_CONFIG.EMAIL_FROM}>`,
+				to: [email],
+				subject: 'Вход в систему',
+				html: renderTemplate(MagicLinkEmail({ magicLink: link })),
+			})
+
+			if (sendResponse.error) {
+				throw new ServiceError(
+					'Auth',
+					`Failed sending login email ${JSON.stringify(sendResponse.error)}`
+				)
+			}
 
 			return { success: true }
 		} catch (error) {

@@ -1,6 +1,8 @@
 {
 	"compilerOptions": {
 		"target": "ESNext",
+		"jsx": "react-jsx",
+		"jsxImportSource": "@kitajs/html",
 		"baseUrl": ".",
 		"module": "ESNext",
 		"moduleResolution": "bundler",
@@ -10,6 +12,7 @@
 		"types": ["bun-types"],
 		"strict": true,
 		"esModuleInterop": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"plugins": [{ "name": "@kitajs/ts-html-plugin" }]
 	}
 }
