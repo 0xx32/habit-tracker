@@ -1,6 +1,8 @@
 import Elysia from 'elysia'
 
-import { authGuard } from '@/middleware/authGuard'
+import { habitController } from '@/modules/habit'
 import { userController } from '@/modules/user'
 
-export const protectedRoutes = new Elysia().use(authGuard).use(userController)
+export const protectedRoutes = new Elysia({ name: 'protected' })
+	.use(userController)
+	.use(habitController)
