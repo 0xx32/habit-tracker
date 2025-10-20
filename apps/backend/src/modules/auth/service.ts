@@ -4,7 +4,7 @@ import { DatabaseError } from 'pg'
 
 import { APP_CONFIG } from '@/config/app.config'
 import { db } from '@/db/client'
-import { findLoginTokenById, updateLoginToken } from '@/db/crud/login-tokens'
+import { deleteLoginToken, findLoginTokenById } from '@/db/crud/login-tokens'
 import { findUserByEmail } from '@/db/crud/users'
 import { loginTokensTable } from '@/db/schemes/login-tokens'
 import { resendClient } from '@/lib/resend'
@@ -63,11 +63,10 @@ export abstract class AuthService {
 		try {
 			const dbToken = await findLoginTokenById(token)
 
-			if (!dbToken) throw new Error('Invalid token')
-			if (dbToken.used) throw new Error('Token already used')
+			if (!dbToken) throw new Error('Invalid token or token already used')
 			if (dbToken.expiresAt < new Date()) throw new Error('Token expired')
 
-			await updateLoginToken(token, { used: true })
+			await deleteLoginToken(token)
 
 			let user = await findUserByEmail(dbToken.email)
 

@@ -1,9 +1,8 @@
-import { boolean, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
+import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 
 export const loginTokensTable = pgTable('login_tokens', {
 	id: uuid().primaryKey(),
 	email: text('email').notNull(),
-	used: boolean().notNull().default(false),
 	expiresAt: timestamp().notNull(),
 })
 

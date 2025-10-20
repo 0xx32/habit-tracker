@@ -15,14 +15,7 @@ export const createLoginToken = async (payload: Omit<LoginTokenInsert, 'used'>) 
 	return result[0]
 }
 
-export const updateLoginToken = async (
-	id: LoginTokenSelect['id'],
-	payload: Partial<LoginTokenInsert>
-) => {
-	const result = await db
-		.update(loginTokensTable)
-		.set(payload)
-		.where(eq(loginTokensTable.id, id))
-		.returning()
+export const deleteLoginToken = async (id: LoginTokenSelect['id']) => {
+	const result = await db.delete(loginTokensTable).where(eq(loginTokensTable.id, id)).returning()
 	return result[0]
 }
